@@ -113,17 +113,11 @@ firefox "https://google.com" &
 ### GUI Applications
 
 ```bash
-# File manager
-pcmanfm &
+# Text editor
+gedit &
 
-# LibreOffice (for document viewing)
-libreoffice &
-
-# Firefox web browser
-firefox &
-
-# Desktop environment
-startlxde &
+# Text-based web browser
+lynx google.com
 ```
 
 ## Security Features
@@ -173,12 +167,8 @@ investigation-container/
 - `poppler-utils` - PDF utilities
 
 ### GUI Applications
-- **LibreOffice** - Office document viewer
-- **Firefox** - Web browser
-- **PCManFM** - File manager
 - **Gedit** - Text editor
-- **EOG** - Image viewer
-- **LXDE** - Lightweight desktop environment
+- **Lynx** - Text-based web browser (secure for URL investigation)
 
 ### Python Libraries
 - `oletools` - Office document analysis
@@ -203,6 +193,9 @@ investigation-container/
 ```bash
 # Test with a safe URL
 ./tools/investigate_url.sh "https://google.com"
+
+# Browse safely with text browser
+lynx google.com
 ```
 
 ## Troubleshooting

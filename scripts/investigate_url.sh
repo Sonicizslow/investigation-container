@@ -40,5 +40,5 @@ echo | tee -a "$REPORT_DIR/http_headers.txt"
 
 echo "=== Investigation Complete ==="
 echo "Report saved to: $REPORT_DIR"
-echo "To open URL in browser, run: firefox \"$URL\" &"
+echo "To open URL in browser, run: lynx \"$URL\""
 echo "WARNING: Only open trusted URLs in the browser!"

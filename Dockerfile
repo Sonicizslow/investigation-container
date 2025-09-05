@@ -18,10 +18,11 @@ RUN apt-get update && apt-get install -y \
     # Python and analysis libraries
     python3 \
     python3-pip \
-    # GUI support for basic functionality
-    firefox \
+    # Web browser (lynx is a text-based browser that works without GUI)
+    lynx \
+    # Text editor
     gedit \
-    # Minimal desktop components
+    # GUI support for basic functionality
     x11-apps \
     && rm -rf /var/lib/apt/lists/*
 
@@ -34,7 +35,7 @@ RUN pip3 install --trusted-host pypi.org --trusted-host pypi.python.org --truste
 RUN useradd -m -s /bin/bash investigator && \
     usermod -aG sudo investigator
 
-# Create directories for investigations
+# Create directories for investigations with proper ownership
 RUN mkdir -p /home/investigator/investigations && \
     mkdir -p /home/investigator/tools && \
     chown -R investigator:investigator /home/investigator

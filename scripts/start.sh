@@ -13,7 +13,7 @@ echo "  safe_view.sh <file>         - View a document safely"
 echo
 echo "URL Investigation:"
 echo "  investigate_url.sh <url>    - Analyze a URL"
-echo "  firefox <url>               - Open URL in browser"
+echo "  lynx <url>                  - Open URL in text browser"
 echo
 echo "File Management:"
 echo "  Downloads folder: ~/downloads (read-only)"
@@ -24,7 +24,7 @@ echo "  file <file>                 - Identify file type"
 echo "  strings <file>              - Extract strings (or use grep)"
 echo "  xxd <file>                  - Hex dump"
 echo "  python3                     - Python interpreter"
-echo "  firefox                     - Web browser"
+echo "  lynx                        - Text-based web browser"
 echo "  gedit                       - Text editor"
 echo
 echo "Security Note: Running as non-root user 'investigator'"

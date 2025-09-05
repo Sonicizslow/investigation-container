@@ -15,8 +15,8 @@ echo "Opening $FILE safely..."
 
 case "${EXT,,}" in
     pdf)
-        echo "Opening PDF with Firefox (built-in PDF viewer)..."
-        firefox "file://$FILE" 2>/dev/null &
+        echo "Opening PDF with gedit for text viewing..."
+        gedit "$FILE" 2>/dev/null &
         ;;
     doc|docx|odt|txt|log)
         echo "Opening document with gedit..."
