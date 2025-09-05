@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Investigation Container
+Comment=Security Analysis Tools
+Exec=python3 /home/investigator/tools/investigation_gui.py
+Icon=applications-security
+Terminal=false
+Categories=Security;Development;
+StartupNotify=true

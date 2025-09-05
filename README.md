@@ -6,40 +6,13 @@ A containerized investigation tool for cyber security professionals to safely an
 
 - **Document Analysis**: Analyze PDF, DOCX, XLSX files for malicious content
 - **URL Investigation**: Safely investigate suspicious URLs
-- **GUI Tools**: LibreOffice, Firefox, file manager for interactive analysis
+- **Full GUI Environment**: Complete desktop environment accessible via RDP
+- **GUI Dashboard**: User-friendly graphical interface for all investigation tools
 - **CLI Tools**: exiftool, binwalk, strings, and more for command-line analysis
 - **Security**: Runs as non-root user with minimal permissions
 - **Isolation**: Downloads folder mounted read-only from host
 
-## Prerequisites
-
-- Docker and Docker Compose installed
-- X11 server running (for GUI applications)
-- `~/phishing/Downloads` directory on host system
-
-### Linux Setup
-
-For GUI applications to work, you need to allow X11 connections:
-
-```bash
-# Allow local connections to X server
-xhost +local:docker
-```
-
-### macOS Setup
-
-Install XQuartz for X11 support:
-
-```bash
-# Install XQuartz
-brew install --cask xquartz
-
-# Start XQuartz and enable "Allow connections from network clients"
-# Then run:
-xhost +localhost
-```
-
-## Quick Start
+## Quick Start (GUI Mode - Recommended)
 
 1. **Clone the repository**:
    ```bash
@@ -54,16 +27,80 @@ xhost +localhost
 
 3. **Build and start the container**:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
-4. **Access the container**:
-   ```bash
-   # The container will start with an interactive shell
-   # GUI applications will open in separate windows
-   ```
+4. **Connect via RDP**:
+   - **Host**: `localhost`
+   - **Port**: `3389`
+   - **Username**: `investigator`
+   - **Password**: `investigate2024`
 
-## Usage
+   Use any RDP client:
+   - **Windows**: Built-in Remote Desktop Connection
+   - **macOS**: Microsoft Remote Desktop (App Store)
+   - **Linux**: Remmina, FreeRDP, or Vinagre
+
+5. **Access the Investigation Dashboard**:
+   - The GUI dashboard will start automatically
+   - Or double-click the "Investigation Container" icon on the desktop
+
+## GUI Dashboard Features
+
+The Investigation Container includes a user-friendly GUI dashboard with the following features:
+
+### Document Analysis Tab
+- Browse and select documents from the Downloads folder
+- Configure analysis options (basic info, strings, metadata)
+- One-click document analysis with real-time output
+- Safe document viewing
+
+### URL Investigation Tab
+- Enter URLs for automated investigation
+- DNS lookup and HTTP header analysis
+- Safe browsing with text-based browser (Lynx)
+
+### File Browser Tab
+- Quick access to Downloads and Investigations folders
+- Launch applications (LibreOffice, Firefox, Text Editor, etc.)
+- Integrated file management
+
+### Results Tab
+- View all investigation results in an organized list
+- Open investigation reports with double-click
+- Refresh results automatically
+
+## Legacy CLI Mode
+
+For users who prefer command-line access or need X11 forwarding:
+
+### Prerequisites for CLI Mode
+
+- Docker and Docker Compose installed
+- X11 server running (for GUI applications)
+- `~/phishing/Downloads` directory on host system
+
+#### Linux Setup for CLI Mode
+
+For GUI applications to work, you need to allow X11 connections:
+
+```bash
+# Allow local connections to X server
+xhost +local:docker
+```
+
+#### macOS Setup for CLI Mode
+
+Install XQuartz for X11 support:
+
+```bash
+# Install XQuartz
+brew install --cask xquartz
+
+# Start XQuartz and enable "Allow connections from network clients"
+# Then run:
+xhost +localhost
+```
 
 ### Document Analysis
 
@@ -234,6 +271,28 @@ For network traffic analysis, additional tools like Wireshark are available:
 ```bash
 # Start Wireshark (requires additional setup for packet capture)
 wireshark &
+```
+
+### Switching Between GUI and CLI Modes
+
+The container defaults to GUI mode with RDP access. To use CLI mode:
+
+```bash
+# Start in CLI mode (requires X11 setup on host)
+docker compose run --rm investigation-container /home/investigator/tools/start.sh
+
+# Or modify docker-compose.yml to change the default command
+```
+
+For CLI mode, you'll also need to update the docker-compose.yml volumes to include X11:
+
+```yaml
+volumes:
+  - /tmp/.X11-unix:/tmp/.X11-unix:rw
+  - ${HOME}/phishing/Downloads:/home/investigator/downloads:ro
+  - ./investigations:/home/investigator/investigations:rw
+environment:
+  - DISPLAY=${DISPLAY}
 ```
 
 ## Security Considerations
